@@ -1,0 +1,41 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_MODO:    ROLE_USER
+        ROLE_ADMIN:    [ROLE_USER, ROLE_MODO]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_manager
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:   ^/(login$|register|resetting)
+            anonymous: true
+            
+        main:
+            pattern: ^/
+            form_login:
+                provider:    fos_userbundle
+                remember_me: true
+                always_use_default_target_path: false
+                default_target_path: /game
+                target_path_parameter: _target_path
+                use_referer: false
+            remember_me:
+                key:         %secret%
+            anonymous:       true
+            logout:          true
+
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/game/, role: ROLE_USER}

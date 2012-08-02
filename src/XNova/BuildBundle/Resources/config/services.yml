@@ -1,0 +1,7 @@
+parameters:
+#    x_nova_build.example.class: XNova\BuildBundle\Example
+
+services:
+#    x_nova_build.example:
+#        class: %x_nova_build.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

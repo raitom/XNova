@@ -1,0 +1,46 @@
+﻿<defenses>
+    
+    <lightLaser>
+        <bddName>lightLaser</bddName>
+        <name>Laser Léger</name>
+        <ressources>
+            <metal>1500</metal>
+            <diamond></diamond>
+            <gold>0</gold>
+            <antimatter>0</antimatter>
+        </ressources>
+        <factor>1.5</factor>
+        <requirements>
+            <buildings>
+				nothing
+            </buildings>
+            <tech>
+                nothing
+            </tech>
+        </requirements>
+    </lightLaser>
+	
+	<heavyLaser>
+        <bddName>heavyLaser</bddName>
+        <name>Laser Lourd</name>
+        <ressources>
+            <metal>3000</metal>
+            <diamond></diamond>
+            <gold>0</gold>
+            <antimatter>0</antimatter>
+        </ressources>
+        <factor>1.5</factor>
+        <requirements>
+            <buildings>
+				<shipyard>
+					<bddName>shipyard</bddName>
+					<value>2</value>
+				</shipyard>
+            </buildings>
+            <tech>
+                nothing
+            </tech>
+        </requirements>
+    </heavyLaser>
+
+</defenses>

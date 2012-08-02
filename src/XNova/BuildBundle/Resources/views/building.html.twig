@@ -1,0 +1,36 @@
+{% extends "XNovaBuildBundle::layout.html.twig" %}
+
+{% block title %}
+    {{parent()}} - Construction de bâtiments
+{% endblock %}
+    
+{% block content %}
+    <div class="row">
+        <div class="span8 offset2">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <th>Nom</th>
+                    <th>Métal</th>
+                    <th>Diamant</th>
+                    <th>Or</th>
+                    <th>Antimatière</th>
+                    <th>Temps (min)</th>
+                    <th>Construire</th>
+                </thead>
+                <tbody>
+                    {% for object in items %}
+                        <tr>
+                            <td>{{ object.name }}</td>
+                            <td>{{ object.ressources.metal }}</td>
+                            <td>{{ object.ressources.diamond }}</td>
+                            <td>{{ object.ressources.gold }}</td>
+                            <td>{{ object.ressources.antimatter }}</td>
+                            <td>{{ object.time }}</td>
+                            <td>Pas encore codé</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

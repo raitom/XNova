@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="XNova" default="ci" basedir="./../">
+    <property name="source" value="src" />
+ 
+    <target name="ci"
+        description="Tache principale d'integration continue"
+        depends="clean,qa"
+    />
+ 
+    <target name="clean" description="Vide les repertoires d'artefacts">
+		<delete dir="${project.basedir}/XNova/build/api" />
+		<delete dir="${project.basedir}/XNova/build/code-browser" />
+		<delete dir="${project.basedir}/XNova/build/coverage" />
+		<delete dir="${project.basedir}/XNova/build/logs" />
+		<delete dir="${project.basedir}/XNova/build/pdepend" />
+	 
+		<mkdir dir="${project.basedir}/XNova/build/api" />
+		<mkdir dir="${project.basedir}/XNova/build/code-browser" />
+		<mkdir dir="${project.basedir}/XNova/build/coverage" />
+		<mkdir dir="${project.basedir}/XNova/build/logs" />
+		<mkdir dir="${project.basedir}/XNova/build/pdepend" />
+    </target>
+ 
+    <target name="qa" description="Lance les outils d'analyse">
+		<phingcall target="pdepend" />
+		<phingcall target="phpmd" />
+		<phingcall target="phpcpd" />
+		<phingcall target="phploc" />
+		<phingcall target="phpcs" />
+		<phingcall target="phpdoc" />
+		<phingcall target="phpunit" />
+		<phingcall target="phpcb" />
+	</target>
+	
+	<target name="pdepend">
+		<phpdepend file="${project.basedir}/XNova/src/">
+			<logger type="jdepend-xml" outfile="${project.basedir}/XNova/build/logs/jdepend.xml" />
+			<logger type="jdepend-chart" outfile="${project.basedir}/XNova/build/pdepend/dependencies.svg" />
+			<logger type="overview-pyramid" outfile="${project.basedir/XNova}/build/pdepend/overview-pyramid.svg" />
+		</phpdepend>
+	</target>
+	
+	<target name="phpmd">
+		<phpmd file="${project.basedir}/XNova/src/">
+			<formatter type="xml" outfile="${project.basedir}/XNova/build/phpmd.xml" />
+		</phpmd>
+	</target>
+	
+	<target name="phpcpd">
+		<phpcpd file="${project.basedir}/XNova/src/">
+			<formatter type="pmd" outfile="${project.basedir}/XNova/build/logs/pmd-cpd.xml"/>
+		</phpcpd>
+	</target>
+	
+	<target name="phploc">
+		<exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/XNova/build/logs/phploc.csv' '${project.basedir}/XNova/src/'" escape="false" />
+	</target>
+	
+	<target name="phpcs">
+		<phpcodesniffer standard="Symfony2">
+			<fileset dir="${project.basedir}/XNova/src/">
+				<include name="**/*.php"/>
+			</fileset>
+			<formatter type="checkstyle" outfile="${project.basedir}/XNova/build/logs/checkstyle.xml"/>
+		</phpcodesniffer>
+	</target>
+	
+	<target name="phpdoc">
+		<phpdoc title="API Documentation"
+				destdir="${project.basedir}/XNova/build/api"
+				sourcecode="false"
+				output="HTML:Smarty:PHP">
+			<fileset dir="${project.basedir}/XNova/src/">
+				<include name="**/*.php"/>
+			</fileset>
+			<projdocfileset dir=".">
+				<include name="README"/>
+				<include name="INSTALL"/>
+				<include name="CHANGELOG"/>
+			</projdocfileset>
+		</phpdoc>
+	</target>
+	
+	<target name="phpunit">
+		<exec logoutput="true" dir="${project.basedir}/XNova/" command="phpunit --log-junit ${project.basedir}/XNova/app/build/logs/phpunit.xml --coverage-clover ${project.basedir}/XNova/app/build/logs/coverage/clover.xml -c app" escape="false" />
+	</target>
+	
+	<target name="phpcb">
+		<exec logoutput="true" command="phpcb --log '${project.basedir}/XNova/build/logs' --source '${project.basedir}/XNova/src' --output '${project.basedir}/XNova/build/code-browser'" escape="false" />
+	</target>
+
+</project>

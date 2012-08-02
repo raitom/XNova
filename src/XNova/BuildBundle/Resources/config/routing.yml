@@ -1,0 +1,12 @@
+build_default:
+    pattern: /{action}
+    defaults : { _controller: XNovaBuildBundle:Build:default, action: building }
+    requirements:
+        action: building|defense|tech|ship
+        
+build_building:
+    pattern: /{action}/{id}
+    defaults: { _controller: XNovaBuildBundle:Build:build }
+    requirements:
+        id: \d+
+        action: building|defense|tech|ship

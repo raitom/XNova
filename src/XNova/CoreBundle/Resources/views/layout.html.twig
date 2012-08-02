@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block css %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" />
+        {% endblock %}
+            
+        {% block javascript %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+            <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/bootstrap-dropdown.js') }}"></script>
+        {% endblock %}
+        
+        <!-- Script pour le menu -->
+        <script type="text/javascript">
+            $(document).ready(function() { 
+                $('.dropdown-toggle').dropdown();
+            });
+        </script>
+            
+        <title>
+            {% block title %}
+                XNova
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <!-- Barre de menu -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <a class="brand" href="#">XNova</a>
+                        <li><a href="{{ path('game_index') }}">Centre de commandement</a></li>
+                        <!-- mettre ici les menus des autres bundles -->
+                            {% include "XNovaBuildBundle::menu.html.twig" %}
+                        <!-- fin des menus des autres bundles -->
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Affichage des ressources -->
+        <div class="container">
+            <div class="row">
+                <div id="ressources" class="span4 offset4">
+                    <table class="table table-bordered table-condensed">
+                        <thead>
+                            <th>Métal</th>
+                            <th>Cristal</th>
+                            <th>Or</th>
+                            <th>Antimatière</th>
+                            <th>Energie</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ metal }}</td>
+                                <td>{{ diamond }}</td>
+                                <td>{{ gold }}</td>
+                                <td>{{ antimatter }}</td>
+                                <td>{{ energy }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <!-- Contenu -->
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer>
+            <hr>
+            <p align="center">PIND !</p>
+        </footer>
+    </body>
+</html>
