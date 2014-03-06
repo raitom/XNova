@@ -15,7 +15,6 @@ group :development do
   gem 'binding_of_caller'
 end
 
-gem 'bootstrap-generators', '~> 3.1.1'
 gem 'devise'
 gem 'haml-rails'
 gem 'simple_form'
