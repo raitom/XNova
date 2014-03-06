@@ -1,7 +1,0 @@
-parameters:
-#    x_nova_site.example.class: XNova\SiteBundle\Example
-
-services:
-#    x_nova_site.example:
-#        class: %x_nova_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

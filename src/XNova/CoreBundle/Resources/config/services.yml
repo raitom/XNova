@@ -1,8 +1,0 @@
-parameters:
-#    x_nova_core.example.class: XNova\CoreBundle\Example
-
-services:
-#    x_nova_core.example:
-#        class: %x_nova_core.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
-

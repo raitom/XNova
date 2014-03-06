@@ -1,6 +1,0 @@
-game_index:
-    pattern: /
-    defaults: { _controller: XNovaCoreBundle:Game:index }
-    
-
-    

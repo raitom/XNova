@@ -1,4 +1,0 @@
-index:
-    pattern: /
-    defaults: { _controller: XNovaSiteBundle:Site:index }
-    
