@@ -30,3 +30,5 @@ en:
           signin: Sign In
         register:
           signup: Sign Up
+  sidebar:
+    overview: Overview
