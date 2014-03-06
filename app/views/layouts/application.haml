@@ -1,13 +1,26 @@
 !!!
 %html
   %head
-    %title= content_for?(:title) ? yield(:title) : "XNova"
-    %link{href: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css", rel: "stylesheet"}/
-    = yield(:css)
+    %meta{:charset => "utf-8"}
+    %title XNova
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
 
-    %script{src: "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"}
-    = yield(:javascript)
+    /[if lt IE 9]
+      = javascript_include_tag "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
+
+    = stylesheet_link_tag    "application", :media => "all", "data-turbolinks-track" => true
+    = yield(:css)
 
     = csrf_meta_tags
   %body
-    = yield
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, :class => "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable" do
+          %button.close{:type => "button", :data => {:dismiss => "alert"}, :aria => {:hidden => "true"} } &times;
+          = msg
+      = yield
+
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = yield(:javascript)

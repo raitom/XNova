@@ -1,2 +1,16 @@
-- content_for(:css) do
-  = stylesheet_link_tag ''
+%h1 XNova
+%p.lead=t('static_pages.index.desc')
+.panel
+  .panel-content
+    %ul.nav.nav-tabs
+      %li.active
+        %a{href: "#login", "data-toggle" => "tab"} Login
+      %li
+        %a{href: "#signup", "data-toggle" => "tab"} Signup
+    .tab-content
+      %br
+      .tab-pane.active#login
+        = render 'forms/login'
+      .tab-pane#signup
+        = render 'forms/signup'
+

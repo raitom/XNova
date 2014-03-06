@@ -1,0 +1,10 @@
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .form-goup
+    = f.input :email, :autofocus => true, label: false, placeholder: "#{t('static_pages.index.tabs.login.email')}"
+    = f.input :password, label: false, placeholder: "#{t('static_pages.index.tabs.login.password')}"
+    .row
+      .col-md-6
+        = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+        = render "devise/shared/links"
+      .col-md-6
+        = f.button :submit, "#{t('static_pages.index.tabs.login.signin')}"

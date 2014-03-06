@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  static_pages:
+    index:
+      desc: Join the battle on the most famous open-source space war simulator !
+      tabs:
+        login:
+          email: Email address
+          password: Password
+          signin: Sign In
+        register:
+          signup: Sign Up
